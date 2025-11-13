@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import roomescape.domain.ReservationList;
-import roomescape.dto.Reservation;
+import roomescape.dto.ReservationResponse;
 import roomescape.dto.ReservationRequest;
 
 import java.net.URI;
@@ -24,13 +24,13 @@ public class ReservationController {
     }
 
     @GetMapping("/reservations")
-    public List<Reservation> findAll() {
+    public List<ReservationResponse> findAll() {
         return reservations.findAll();
     }
 
     @PostMapping("/reservations")
-    public ResponseEntity<Reservation> create(@RequestBody ReservationRequest request) {
-        Reservation created = reservations.create(request);
+    public ResponseEntity<ReservationResponse> create(@RequestBody ReservationRequest request) {
+        ReservationResponse created = reservations.create(request);
         URI location = URI.create("/reservations/" + created.id());
         return ResponseEntity.created(location).body(created);
     }
