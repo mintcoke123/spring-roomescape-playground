@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Component
 public class ReservationList {
 
     private final Map<Long, Reservation> idToReservation = new HashMap<>();
-    private AtomicLong index = 0;
+    private AtomicLong index;
     public ReservationList() {
         this.index = new AtomicLong(0);
     }
