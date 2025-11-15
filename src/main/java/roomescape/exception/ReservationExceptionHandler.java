@@ -12,7 +12,6 @@ public class ReservationExceptionHandler {
 
     @ExceptionHandler({
             InvalidReservationRequestException.class,
-            NotFoundReservationException.class,
             IllegalArgumentException.class,
             HttpMessageNotReadableException.class,              
             MethodArgumentTypeMismatchException.class,          
@@ -20,6 +19,11 @@ public class ReservationExceptionHandler {
     })
     public ResponseEntity<Void> handleBadRequest(RuntimeException e) {
         return ResponseEntity.badRequest().build();
+    }
+
+    @ExceptionHandler(NotFoundReservationException.class)
+    public ResponseEntity<Void> handleNotFound(NotFoundReservationException e) {
+        return ResponseEntity.status(404).build();
     }
 
     @ExceptionHandler(Exception.class)
